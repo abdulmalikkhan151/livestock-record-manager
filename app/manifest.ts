@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Livestock Record Manager",
     short_name: "Livestock",
-    description: "Private cow, buffalo and goat records for your farm team.",
+    description: "Private cow, buffalo, goat and camel records for your farm team.",
     start_url: "/",
     display: "standalone",
     background_color: "#f4f1e9",

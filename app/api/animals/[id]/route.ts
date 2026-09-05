@@ -58,7 +58,7 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
   const species = textValue(data, "species");
   const sex = textValue(data, "sex");
   const status = textValue(data, "status");
-  if (!tagNumber || !["Cow", "Buffalo", "Goat"].includes(species || "") || !["Female", "Male"].includes(sex || "") || !["Active", "Sold", "Deceased"].includes(status || "")) {
+  if (!tagNumber || !["Cow", "Buffalo", "Goat", "Camel"].includes(species || "") || !["Female", "Male"].includes(sex || "") || !["Active", "Sold", "Deceased"].includes(status || "")) {
     return Response.json({ error: "Tag number, type, sex and status are required." }, { status: 400 });
   }
   const { data: duplicate } = await admin.from("animals").select("id").eq("farm_id", user.farmId).eq("tag_number", tagNumber).neq("id", id).maybeSingle();

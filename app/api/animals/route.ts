@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     const tagNumber = textValue(data, "tagNumber");
     const species = textValue(data, "species");
     const sex = textValue(data, "sex");
-    if (!tagNumber || !["Cow", "Buffalo", "Goat"].includes(species ?? "") || !["Female", "Male"].includes(sex ?? "")) {
+    if (!tagNumber || !["Cow", "Buffalo", "Goat", "Camel"].includes(species ?? "") || !["Female", "Male"].includes(sex ?? "")) {
       return Response.json({ error: "Tag number, animal type and sex are required." }, { status: 400 });
     }
 
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       id, farm_id: user.farmId,
       tag_number: tagNumber,
       name: textValue(data, "name"),
-      species: species as "Cow" | "Buffalo" | "Goat",
+      species: species as "Cow" | "Buffalo" | "Goat" | "Camel",
       breed: textValue(data, "breed"),
       sex: sex as "Female" | "Male",
       status: "Active",

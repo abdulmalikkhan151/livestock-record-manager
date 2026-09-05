@@ -126,7 +126,7 @@ button { cursor: pointer; }
 .farm-summary-count strong { margin: 7px 0 9px; font-family: Georgia, serif; font-size: 52px; line-height: 1; color: #f6d39a; }
 .farm-summary-count small { color: #c3d4cd; font-size: 10px; line-height: 1.5; }
 
-.stats-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 15px; }
+.stats-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 15px; }
 .stat-card { position: relative; display: flex; gap: 15px; min-height: 134px; padding: 22px; border: 1px solid rgba(211,211,199,.9); border-radius: 19px; background: linear-gradient(145deg, #fffdf8, #faf9f3); overflow: hidden; box-shadow: 0 10px 30px rgba(33,51,44,.055); }
 .stat-card::after { content: ""; position: absolute; width: 90px; height: 90px; right: -40px; bottom: -40px; border-radius: 50%; background: currentColor; opacity: .055; }
 .stat-card .stat-icon { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 13px; }
@@ -383,6 +383,10 @@ button { cursor: pointer; }
 .auth-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 16px; }
 .auth-grid .full { grid-column: 1 / -1; }
 .mobile-nav { display: none; }
+
+@media (max-width: 1450px) {
+  .stats-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
 
 @media (max-width: 1100px) {
   .app-frame { grid-template-columns: 220px minmax(0,1fr); }

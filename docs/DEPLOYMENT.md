@@ -56,7 +56,7 @@ Create a private repository under the final Owner's GitHub account and push this
 ## 7. Test before entering real records
 
 - Owner can log in and out.
-- Owner can add and edit a cow, buffalo and goat.
+- Owner can add and edit a cow, buffalo, goat and camel.
 - Photo and old WhatsApp/PDF attachment open correctly.
 - Search and filters work.
 - Weight, health, expense and sale entries save.
@@ -68,6 +68,17 @@ Create a private repository under the final Owner's GitHub account and push this
 - Android and iPhone can add the site to the home screen.
 
 Delete the test records after verification.
+
+### Updating an existing live website to support camels
+
+If `0001_initial.sql` was already run before Camel support was added:
+
+1. Open the Supabase SQL Editor.
+2. Run `supabase/migrations/0002_add_camel.sql` once.
+3. Push the updated code to the GitHub `main` branch.
+4. Wait for Vercel to deploy, then refresh the website.
+
+The existing animal records remain unchanged.
 
 ## 8. Staff onboarding
 

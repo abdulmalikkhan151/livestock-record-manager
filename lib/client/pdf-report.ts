@@ -3,7 +3,7 @@ type AnimalStatus = "Active" | "Sold" | "Deceased";
 export type ReportAnimal = {
   tagNumber: string;
   name: string | null;
-  species: "Cow" | "Buffalo" | "Goat";
+  species: "Cow" | "Buffalo" | "Goat" | "Camel";
   breed: string | null;
   sex: "Female" | "Male";
   status: AnimalStatus;

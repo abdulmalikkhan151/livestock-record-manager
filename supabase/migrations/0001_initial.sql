@@ -2,7 +2,7 @@
 create extension if not exists pgcrypto;
 
 create type public.app_role as enum ('owner', 'staff');
-create type public.animal_species as enum ('Cow', 'Buffalo', 'Goat');
+create type public.animal_species as enum ('Cow', 'Buffalo', 'Goat', 'Camel');
 create type public.animal_sex as enum ('Female', 'Male');
 create type public.animal_status as enum ('Active', 'Sold', 'Deceased');
 create type public.health_category as enum ('Vaccination', 'Treatment', 'Checkup');

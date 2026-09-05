@@ -1,6 +1,6 @@
 # Livestock Record Manager
 
-An independent, installable livestock management website for cows, buffaloes and goats. It runs on Vercel, stores private records in Supabase and does not require ChatGPT for the Owner or staff.
+An independent, installable livestock management website for cows, buffaloes, goats and camels. It runs on Vercel, stores private records in Supabase and does not require ChatGPT for the Owner or staff.
 
 ## Included
 
@@ -8,7 +8,7 @@ An independent, installable livestock management website for cows, buffaloes and
 - Owner-only animal creation, editing and history updates
 - Read-only Staff access that the Owner can disable at any time
 - Private staff invitation links that can be shared through WhatsApp
-- Cow, buffalo and goat profiles with photos
+- Cow, buffalo, goat and camel profiles with photos
 - Seller, purchase price/date, starting weight, breed, location and notes
 - Search by tag, name, breed, seller or location
 - Weight, vaccination, treatment, checkup, expense and sale history

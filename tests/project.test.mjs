@@ -26,8 +26,13 @@ test("database includes every requested animal and history table", async () => {
   for (const name of ["animals", "weight_records", "health_records", "expense_records", "sale_records", "attachments", "staff_invitations", "activity_logs"]) {
     assert.match(migration, new RegExp(`create table public\\.${name}`));
   }
-  assert.match(migration, /'Cow', 'Buffalo', 'Goat'/);
+  assert.match(migration, /'Cow', 'Buffalo', 'Goat', 'Camel'/);
   assert.match(migration, /enable row level security/);
+});
+
+test("existing databases can be upgraded with camel support", async () => {
+  const migration = await read("supabase/migrations/0002_add_camel.sql");
+  assert.match(migration, /alter type public\.animal_species add value if not exists 'Camel'/);
 });
 
 test("PWA does not cache authenticated pages or API responses", async () => {

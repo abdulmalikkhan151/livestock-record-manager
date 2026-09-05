@@ -37,7 +37,7 @@ type Animal = {
   id: string;
   tagNumber: string;
   name: string | null;
-  species: "Cow" | "Buffalo" | "Goat";
+  species: "Cow" | "Buffalo" | "Goat" | "Camel";
   breed: string | null;
   sex: "Female" | "Male";
   status: "Active" | "Sold" | "Deceased";
@@ -152,6 +152,7 @@ export function LivestockDashboard({ identity }: { identity: { displayName: stri
     cows: animals.filter((animal) => animal.species === "Cow" && animal.status === "Active").length,
     buffaloes: animals.filter((animal) => animal.species === "Buffalo" && animal.status === "Active").length,
     goats: animals.filter((animal) => animal.species === "Goat" && animal.status === "Active").length,
+    camels: animals.filter((animal) => animal.species === "Camel" && animal.status === "Active").length,
     invested: animals.reduce((sum, animal) => sum + (animal.purchasePrice ?? 0), 0),
   }), [animals]);
 
@@ -281,7 +282,7 @@ function NavButton({ active, icon, label, onClick }: { active: boolean; icon: Re
 
 function DashboardView({ loading, summary, animals, canEdit, onOpenAnimal, onAdd, onViewAll, onReports, onDownload }: {
   loading: boolean;
-  summary: { total: number; active: number; cows: number; buffaloes: number; goats: number; invested: number };
+  summary: { total: number; active: number; cows: number; buffaloes: number; goats: number; camels: number; invested: number };
   animals: Animal[];
   canEdit: boolean;
   onOpenAnimal(id: string): void;
@@ -302,13 +303,14 @@ function DashboardView({ loading, summary, animals, canEdit, onOpenAnimal, onAdd
             <Button variant="outline" onClick={onReports}><ClipboardList /> Open reports</Button>
           </div>
         </div>
-        <div className="farm-summary-count"><span>Active livestock</span><strong>{loading ? "—" : summary.active}</strong><small>{summary.cows} cows · {summary.buffaloes} buffaloes · {summary.goats} goats</small></div>
+        <div className="farm-summary-count"><span>Active livestock</span><strong>{loading ? "—" : summary.active}</strong><small>{summary.cows} cows · {summary.buffaloes} buffaloes · {summary.goats} goats · {summary.camels} camels</small></div>
       </section>
       <section className="stats-grid" aria-label="Livestock summary">
         <StatCard icon={<Beef />} label="Total animals" value={summary.total.toString()} note={`${summary.active} currently active`} tone="green" loading={loading} />
         <StatCard icon={<Activity />} label="Active cows" value={summary.cows.toString()} note="Current farm stock" tone="amber" loading={loading} />
         <StatCard icon={<Gauge />} label="Active buffaloes" value={summary.buffaloes.toString()} note="Current farm stock" tone="clay" loading={loading} />
         <StatCard icon={<Beef />} label="Active goats" value={summary.goats.toString()} note="Current farm stock" tone="green" loading={loading} />
+        <StatCard icon={<Beef />} label="Active camels" value={summary.camels.toString()} note="Current farm stock" tone="amber" loading={loading} />
         <StatCard icon={<WalletCards />} label="Purchase value" value={formatPKR(summary.invested)} note="All recorded animals" tone="cream" loading={loading} />
       </section>
       <section className="section-card">
@@ -343,7 +345,7 @@ function AnimalsView({ loading, animals, canEdit, query, setQuery, species, setS
         <div className="search-box"><Search /><Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search tag, name, breed or seller…" aria-label="Search animals" /></div>
         <Select value={species} onValueChange={setSpecies}>
           <SelectTrigger className="filter-select"><SelectValue /></SelectTrigger>
-          <SelectContent><SelectItem value="All">All animals</SelectItem><SelectItem value="Cow">Cows</SelectItem><SelectItem value="Buffalo">Buffaloes</SelectItem><SelectItem value="Goat">Goats</SelectItem></SelectContent>
+          <SelectContent><SelectItem value="All">All animals</SelectItem><SelectItem value="Cow">Cows</SelectItem><SelectItem value="Buffalo">Buffaloes</SelectItem><SelectItem value="Goat">Goats</SelectItem><SelectItem value="Camel">Camels</SelectItem></SelectContent>
         </Select>
         <Select value={status} onValueChange={setStatus}>
           <SelectTrigger className="filter-select"><SelectValue /></SelectTrigger>
@@ -364,7 +366,7 @@ function AnimalsView({ loading, animals, canEdit, query, setQuery, species, setS
 function ReportsView({ loading, animals, summary, canBackup, onDownload, onBackup, onInstall }: {
   loading: boolean;
   animals: Animal[];
-  summary: { total: number; active: number; cows: number; buffaloes: number; goats: number; invested: number };
+  summary: { total: number; active: number; cows: number; buffaloes: number; goats: number; camels: number; invested: number };
   canBackup: boolean;
   onDownload(): void;
   onBackup(): void;
@@ -476,14 +478,14 @@ function AddAnimalDialog({ onCreated }: { onCreated(): void }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild><Button id="add-animal-trigger" size="lg"><PackagePlus /> <span>Add animal</span></Button></DialogTrigger>
       <DialogContent className="add-dialog">
-        <DialogHeader><DialogTitle>Add a new animal</DialogTitle><DialogDescription>Create one complete cow, buffalo or goat record. You can add history later.</DialogDescription></DialogHeader>
+        <DialogHeader><DialogTitle>Add a new animal</DialogTitle><DialogDescription>Create one complete cow, buffalo, goat or camel record. You can add history later.</DialogDescription></DialogHeader>
         <form onSubmit={submit} className="animal-form">
           <FormSection title="Identity & photo" icon={<ImagePlus />}>
             <div className="form-grid">
               <Field label="Animal photo" className="full"><Input name="photo" type="file" accept="image/*" /></Field>
               <Field label="Tag / ID number *"><Input name="tagNumber" required placeholder="e.g. BF-024" /></Field>
               <Field label="Animal name"><Input name="name" placeholder="Optional name" /></Field>
-              <Field label="Animal type *"><Select name="species" defaultValue="Buffalo"><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Buffalo">Buffalo</SelectItem><SelectItem value="Cow">Cow</SelectItem><SelectItem value="Goat">Goat</SelectItem></SelectContent></Select></Field>
+              <Field label="Animal type *"><Select name="species" defaultValue="Buffalo"><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Buffalo">Buffalo</SelectItem><SelectItem value="Cow">Cow</SelectItem><SelectItem value="Goat">Goat</SelectItem><SelectItem value="Camel">Camel</SelectItem></SelectContent></Select></Field>
               <Field label="Sex *"><Select name="sex" defaultValue="Female"><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Female">Female</SelectItem><SelectItem value="Male">Male</SelectItem></SelectContent></Select></Field>
               <Field label="Breed"><Input name="breed" placeholder="e.g. Nili Ravi" /></Field>
               <Field label="Color / markings"><Input name="color" placeholder="Black, white patch…" /></Field>
@@ -539,7 +541,7 @@ function EditAnimalDialog({ animal, onSaved }: { animal: Animal; onSaved(): Prom
           <Field label="Replace photo" className="full" hint="Leave blank to keep the current photo"><Input name="photo" type="file" accept="image/*" /></Field>
           <Field label="Tag / ID number *"><Input name="tagNumber" defaultValue={animal.tagNumber} required /></Field>
           <Field label="Animal name"><Input name="name" defaultValue={animal.name || ""} /></Field>
-          <Field label="Animal type *"><Select name="species" defaultValue={animal.species}><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Buffalo">Buffalo</SelectItem><SelectItem value="Cow">Cow</SelectItem><SelectItem value="Goat">Goat</SelectItem></SelectContent></Select></Field>
+          <Field label="Animal type *"><Select name="species" defaultValue={animal.species}><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Buffalo">Buffalo</SelectItem><SelectItem value="Cow">Cow</SelectItem><SelectItem value="Goat">Goat</SelectItem><SelectItem value="Camel">Camel</SelectItem></SelectContent></Select></Field>
           <Field label="Sex *"><Select name="sex" defaultValue={animal.sex}><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Female">Female</SelectItem><SelectItem value="Male">Male</SelectItem></SelectContent></Select></Field>
           <Field label="Status *"><Select name="status" defaultValue={animal.status}><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Active">Active</SelectItem><SelectItem value="Sold">Sold</SelectItem><SelectItem value="Deceased">Deceased</SelectItem></SelectContent></Select></Field>
           <Field label="Breed"><Input name="breed" defaultValue={animal.breed || ""} /></Field>

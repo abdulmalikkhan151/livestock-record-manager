@@ -32,7 +32,7 @@ export function LoginForm() {
     <main className="auth-shell">
       <section className="auth-brand-panel">
         <div className="auth-brand"><span><Beef /></span><strong>Livestock<small>Record Manager</small></strong></div>
-        <div><p className="eyebrow">Private farm control</p><h1>Every animal’s complete story, in one secure place.</h1><p>Search cows, buffaloes and goats. Review purchase, weight, health, expense and sale history from any device.</p></div>
+        <div><p className="eyebrow">Private farm control</p><h1>Every animal’s complete story, in one secure place.</h1><p>Search cows, buffaloes, goats and camels. Review purchase, weight, health, expense and sale history from any device.</p></div>
         <small>Independent website · No ChatGPT account required</small>
       </section>
       <section className="auth-form-panel">

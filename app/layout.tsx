@@ -4,7 +4,7 @@ import { PwaRegister } from "./pwa-register";
 
 export const metadata: Metadata = {
   title: "Livestock Record Manager",
-  description: "Private cow, buffalo and goat records, weights, health history and farm expenses.",
+  description: "Private cow, buffalo, goat and camel records, weights, health history and farm expenses.",
   applicationName: "Livestock Records",
   appleWebApp: { capable: true, statusBarStyle: "default", title: "Livestock Records" },
   icons: {
